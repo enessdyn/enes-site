@@ -1,0 +1,904 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Enes | Personal</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07111f;
+            color: #eef7ff;
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           ARKA PLAN
+        ========================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    rgba(7, 17, 31, 0.92),
+                    rgba(7, 17, 31, 0.97)
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 79px,
+                    rgba(80, 190, 255, 0.035) 80px
+                );
+
+            pointer-events: none;
+            z-index: -5;
+        }
+
+
+        .blue-light {
+            position: fixed;
+
+            width: 600px;
+            height: 600px;
+
+            border-radius: 50%;
+
+            background: #00aaff;
+
+            filter: blur(170px);
+
+            opacity: 0.13;
+
+            top: -250px;
+            right: -150px;
+
+            pointer-events: none;
+
+            z-index: -2;
+        }
+
+
+        .cyan-light {
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            background: #00e5ff;
+
+            filter: blur(160px);
+
+            opacity: 0.08;
+
+            bottom: -200px;
+            left: -150px;
+
+            pointer-events: none;
+
+            z-index: -2;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+
+            top: 22px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: min(1000px, 92%);
+
+            height: 64px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 24px;
+
+            background: rgba(9, 25, 42, 0.75);
+
+            border: 1px solid rgba(100, 210, 255, 0.12);
+
+            backdrop-filter: blur(20px);
+
+            border-radius: 18px;
+
+            z-index: 100;
+
+            box-shadow:
+                0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .logo {
+            font-size: 19px;
+
+            font-weight: 800;
+
+            letter-spacing: 4px;
+
+            color: #ffffff;
+        }
+
+
+        .links {
+            display: flex;
+            gap: 30px;
+        }
+
+
+        .links a {
+            color: #7f9aae;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+
+        .links a:hover {
+            color: #55dcff;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            padding: 120px 9% 80px;
+
+            position: relative;
+        }
+
+
+        .status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #83a0b5;
+
+            font-size: 13px;
+
+            margin-bottom: 30px;
+
+            animation: appear 1s ease;
+        }
+
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #35e0a0;
+
+            box-shadow:
+                0 0 15px #35e0a0;
+        }
+
+
+        .hero h1 {
+            font-size: clamp(80px, 16vw, 220px);
+
+            line-height: 0.78;
+
+            letter-spacing: -13px;
+
+            font-weight: 900;
+
+            color: #ffffff;
+
+            animation: heroTitle 1s ease;
+        }
+
+
+        .hero h1 span {
+            color: #45d9ff;
+        }
+
+
+        .subtitle {
+            margin-top: 45px;
+
+            max-width: 600px;
+
+            color: #7890a3;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            animation: appear 1.6s ease;
+        }
+
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 14px;
+
+            margin-top: 35px;
+
+            animation: appear 2s ease;
+        }
+
+
+        .button {
+            padding: 14px 23px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+
+        .primary {
+            background: #45d9ff;
+
+            color: #03101a;
+
+            box-shadow:
+                0 0 25px rgba(69, 217, 255, 0.15);
+        }
+
+
+        .primary:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 35px rgba(69, 217, 255, 0.25);
+        }
+
+
+        .secondary {
+            color: #d7edf7;
+
+            border: 1px solid #29465a;
+
+            background: rgba(255,255,255,0.02);
+        }
+
+
+        .secondary:hover {
+            border-color: #45d9ff;
+
+            color: #45d9ff;
+
+            transform: translateY(-4px);
+        }
+
+
+        /* =========================
+           DECORATIVE LINE
+        ========================= */
+
+        .hero-line {
+            position: absolute;
+
+            right: 9%;
+            bottom: 15%;
+
+            width: 220px;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #45d9ff
+                );
+
+            opacity: 0.5;
+        }
+
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            width: min(1100px, 90%);
+
+            margin: auto;
+
+            padding: 140px 0;
+
+            border-top:
+                1px solid rgba(120, 190, 220, 0.08);
+        }
+
+
+        .label {
+            color: #45d9ff;
+
+            font-size: 11px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 20px;
+        }
+
+
+        section h2 {
+            font-size: clamp(42px, 6vw, 70px);
+
+            letter-spacing: -4px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .about-text {
+            max-width: 760px;
+
+            color: #7890a3;
+
+            font-size: 22px;
+
+            line-height: 1.7;
+        }
+
+
+        .about-text strong {
+            color: #dff7ff;
+        }
+
+
+        /* =========================
+           PROJELER
+        ========================= */
+
+        .projects {
+            margin-top: 50px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .project {
+            min-height: 230px;
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(40, 90, 120, 0.18),
+                    rgba(10, 25, 40, 0.5)
+                );
+
+            border:
+                1px solid rgba(100, 210, 255, 0.1);
+
+            border-radius: 20px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: 0.4s;
+        }
+
+
+        .project::after {
+            content: "";
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 50%;
+
+            background: #00d9ff;
+
+            filter: blur(80px);
+
+            opacity: 0.07;
+
+            right: -50px;
+            bottom: -50px;
+        }
+
+
+        .project:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(69, 217, 255, 0.35);
+        }
+
+
+        .project-number {
+            color: #416477;
+
+            font-size: 12px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .project h3 {
+            font-size: 24px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .project p {
+            color: #71899b;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           İLETİŞİM
+        ========================= */
+
+        .contact {
+            padding: 70px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(40, 120, 160, 0.16),
+                    rgba(10, 20, 35, 0.6)
+                );
+
+            border:
+                1px solid rgba(100, 210, 255, 0.12);
+        }
+
+
+        .contact h2 {
+            margin-bottom: 15px;
+        }
+
+
+        .contact p {
+            color: #71899b;
+
+            margin-bottom: 30px;
+        }
+
+
+        .instagram {
+            display: inline-block;
+
+            padding: 14px 25px;
+
+            border-radius: 10px;
+
+            background: #45d9ff;
+
+            color: #03101a;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .instagram:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(69, 217, 255, 0.25);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 50px;
+
+            color: #3d5668;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           ANİMASYON
+        ========================= */
+
+        @keyframes heroTitle {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(60px)
+                    scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================
+           TELEFON
+        ========================= */
+
+        @media(max-width: 700px) {
+
+            nav {
+                width: 94%;
+            }
+
+            .links {
+                gap: 12px;
+            }
+
+            .links a {
+                font-size: 11px;
+            }
+
+            .hero {
+                padding-left: 7%;
+                padding-right: 7%;
+            }
+
+            .hero h1 {
+                letter-spacing: -7px;
+            }
+
+            section {
+                padding: 100px 0;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .contact {
+                padding: 45px 20px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="blue-light"></div>
+    <div class="cyan-light"></div>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            ENES.
+        </div>
+
+        <div class="links">
+
+            <a href="#about">
+                Hakkımda
+            </a>
+
+            <a href="#projects">
+                Projeler
+            </a>
+
+            <a href="#contact">
+                İletişim
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <main class="hero">
+
+        <div class="status">
+
+            <div class="status-dot"></div>
+
+            Şu anda online
+
+        </div>
+
+
+        <h1>
+            ENES<span>.</span>
+        </h1>
+
+
+        <p class="subtitle">
+
+            Teknoloji, oyunlar ve yeni projelerle
+            ilgilenen biriyim. Fikirleri gerçek
+            projelere dönüştürmeyi seviyorum.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#projects"
+                class="button primary"
+            >
+                Projeler →
+            </a>
+
+
+            <a
+                href="#contact"
+                class="button secondary"
+            >
+                Bana Ulaş
+            </a>
+
+        </div>
+
+
+        <div class="hero-line"></div>
+
+    </main>
+
+
+    <!-- HAKKIMDA -->
+
+    <section id="about">
+
+        <div class="label">
+            01 / Hakkımda
+        </div>
+
+
+        <h2>
+            Ben kimim?
+        </h2>
+
+
+        <p class="about-text">
+
+            Merhaba, ben <strong>Enes.</strong>
+            Teknolojiyle uğraşmayı, yeni şeyler
+            öğrenmeyi ve kendi projelerimi
+            geliştirmeyi seviyorum.
+
+            <br><br>
+
+            Bu siteyi de tamamen kendi fikirlerimle
+            oluşturduğum kişisel bir proje olarak
+            geliştiriyorum.
+
+        </p>
+
+    </section>
+
+
+    <!-- PROJELER -->
+
+    <section id="projects">
+
+        <div class="label">
+            02 / Projeler
+        </div>
+
+
+        <h2>
+            Çalışmalar.
+        </h2>
+
+
+        <div class="projects">
+
+
+            <div class="project">
+
+                <div class="project-number">
+                    PROJECT 01
+                </div>
+
+                <h3>
+                    Kişisel Web Sitesi
+                </h3>
+
+                <p>
+                    Kendi tasarladığım ve geliştirdiğim
+                    kişisel web sitesi.
+                </p>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-number">
+                    PROJECT 02
+                </div>
+
+                <h3>
+                    Çalışır
+                </h3>
+
+                <p>
+                    Yeni proje yakında burada.
+                </p>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-number">
+                    PROJECT 03
+                </div>
+
+                <h3>
+                    Çalışır
+                </h3>
+
+                <p>
+                    Üzerinde çalışacağım yeni fikir.
+                </p>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-number">
+                    PROJECT 04
+                </div>
+
+                <h3>
+                    Çalışır
+                </h3>
+
+                <p>
+                    Yakında daha fazla proje.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- İLETİŞİM -->
+
+    <section id="contact">
+
+        <div class="contact">
+
+            <div class="label">
+                03 / İletişim
+            </div>
+
+
+            <h2>
+                Bağlantıda kal.
+            </h2>
+
+
+            <p>
+                Beni Instagram üzerinden bulabilirsin.
+            </p>
+
+
+            <a
+                href="https://www.instagram.com/enessdyn/"
+                class="instagram"
+                target="_blank"
+            >
+                Instagram ↗
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        © 2026 ENES.
+
+    </footer>
+
+
+</body>
+</html>
+```
