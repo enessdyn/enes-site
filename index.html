@@ -1,904 +1,619 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Enes | Personal</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #07111f;
-            color: #eef7ff;
-            overflow-x: hidden;
-        }
-
-
-        /* =========================
-           ARKA PLAN
-        ========================= */
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    rgba(7, 17, 31, 0.92),
-                    rgba(7, 17, 31, 0.97)
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent 0px,
-                    transparent 79px,
-                    rgba(80, 190, 255, 0.035) 80px
-                );
-
-            pointer-events: none;
-            z-index: -5;
-        }
-
-
-        .blue-light {
-            position: fixed;
-
-            width: 600px;
-            height: 600px;
-
-            border-radius: 50%;
-
-            background: #00aaff;
-
-            filter: blur(170px);
-
-            opacity: 0.13;
-
-            top: -250px;
-            right: -150px;
-
-            pointer-events: none;
-
-            z-index: -2;
-        }
-
-
-        .cyan-light {
-            position: fixed;
-
-            width: 450px;
-            height: 450px;
-
-            border-radius: 50%;
-
-            background: #00e5ff;
-
-            filter: blur(160px);
-
-            opacity: 0.08;
-
-            bottom: -200px;
-            left: -150px;
-
-            pointer-events: none;
-
-            z-index: -2;
-        }
-
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        nav {
-            position: fixed;
-
-            top: 22px;
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            width: min(1000px, 92%);
-
-            height: 64px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            padding: 0 24px;
-
-            background: rgba(9, 25, 42, 0.75);
-
-            border: 1px solid rgba(100, 210, 255, 0.12);
-
-            backdrop-filter: blur(20px);
-
-            border-radius: 18px;
-
-            z-index: 100;
-
-            box-shadow:
-                0 15px 50px rgba(0, 0, 0, 0.3);
-        }
-
-
-        .logo {
-            font-size: 19px;
-
-            font-weight: 800;
-
-            letter-spacing: 4px;
-
-            color: #ffffff;
-        }
-
-
-        .links {
-            display: flex;
-            gap: 30px;
-        }
-
-
-        .links a {
-            color: #7f9aae;
-
-            text-decoration: none;
-
-            font-size: 13px;
-
-            transition: 0.3s;
-        }
-
-
-        .links a:hover {
-            color: #55dcff;
-        }
-
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 100vh;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-
-            padding: 120px 9% 80px;
-
-            position: relative;
-        }
-
-
-        .status {
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            color: #83a0b5;
-
-            font-size: 13px;
-
-            margin-bottom: 30px;
-
-            animation: appear 1s ease;
-        }
-
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-
-            border-radius: 50%;
-
-            background: #35e0a0;
-
-            box-shadow:
-                0 0 15px #35e0a0;
-        }
-
-
-        .hero h1 {
-            font-size: clamp(80px, 16vw, 220px);
-
-            line-height: 0.78;
-
-            letter-spacing: -13px;
-
-            font-weight: 900;
-
-            color: #ffffff;
-
-            animation: heroTitle 1s ease;
-        }
-
-
-        .hero h1 span {
-            color: #45d9ff;
-        }
-
-
-        .subtitle {
-            margin-top: 45px;
-
-            max-width: 600px;
-
-            color: #7890a3;
-
-            font-size: 18px;
-
-            line-height: 1.7;
-
-            animation: appear 1.6s ease;
-        }
-
-
-        .hero-buttons {
-            display: flex;
-
-            gap: 14px;
-
-            margin-top: 35px;
-
-            animation: appear 2s ease;
-        }
-
-
-        .button {
-            padding: 14px 23px;
-
-            border-radius: 10px;
-
-            text-decoration: none;
-
-            font-size: 14px;
-
-            font-weight: 700;
-
-            transition: 0.3s;
-        }
-
-
-        .primary {
-            background: #45d9ff;
-
-            color: #03101a;
-
-            box-shadow:
-                0 0 25px rgba(69, 217, 255, 0.15);
-        }
-
-
-        .primary:hover {
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 10px 35px rgba(69, 217, 255, 0.25);
-        }
-
-
-        .secondary {
-            color: #d7edf7;
-
-            border: 1px solid #29465a;
-
-            background: rgba(255,255,255,0.02);
-        }
-
-
-        .secondary:hover {
-            border-color: #45d9ff;
-
-            color: #45d9ff;
-
-            transform: translateY(-4px);
-        }
-
-
-        /* =========================
-           DECORATIVE LINE
-        ========================= */
-
-        .hero-line {
-            position: absolute;
-
-            right: 9%;
-            bottom: 15%;
-
-            width: 220px;
-            height: 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    #45d9ff
-                );
-
-            opacity: 0.5;
-        }
-
-
-        /* =========================
-           SECTIONS
-        ========================= */
-
-        section {
-            width: min(1100px, 90%);
-
-            margin: auto;
-
-            padding: 140px 0;
-
-            border-top:
-                1px solid rgba(120, 190, 220, 0.08);
-        }
-
-
-        .label {
-            color: #45d9ff;
-
-            font-size: 11px;
-
-            letter-spacing: 4px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 20px;
-        }
-
-
-        section h2 {
-            font-size: clamp(42px, 6vw, 70px);
-
-            letter-spacing: -4px;
-
-            margin-bottom: 35px;
-        }
-
-
-        .about-text {
-            max-width: 760px;
-
-            color: #7890a3;
-
-            font-size: 22px;
-
-            line-height: 1.7;
-        }
-
-
-        .about-text strong {
-            color: #dff7ff;
-        }
-
-
-        /* =========================
-           PROJELER
-        ========================= */
-
-        .projects {
-            margin-top: 50px;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 18px;
-        }
-
-
-        .project {
-            min-height: 230px;
-
-            padding: 30px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(40, 90, 120, 0.18),
-                    rgba(10, 25, 40, 0.5)
-                );
-
-            border:
-                1px solid rgba(100, 210, 255, 0.1);
-
-            border-radius: 20px;
-
-            position: relative;
-
-            overflow: hidden;
-
-            transition: 0.4s;
-        }
-
-
-        .project::after {
-            content: "";
-
-            position: absolute;
-
-            width: 120px;
-            height: 120px;
-
-            border-radius: 50%;
-
-            background: #00d9ff;
-
-            filter: blur(80px);
-
-            opacity: 0.07;
-
-            right: -50px;
-            bottom: -50px;
-        }
-
-
-        .project:hover {
-            transform: translateY(-8px);
-
-            border-color:
-                rgba(69, 217, 255, 0.35);
-        }
-
-
-        .project-number {
-            color: #416477;
-
-            font-size: 12px;
-
-            margin-bottom: 45px;
-        }
-
-
-        .project h3 {
-            font-size: 24px;
-
-            margin-bottom: 12px;
-        }
-
-
-        .project p {
-            color: #71899b;
-
-            line-height: 1.6;
-
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           İLETİŞİM
-        ========================= */
-
-        .contact {
-            padding: 70px;
-
-            text-align: center;
-
-            border-radius: 25px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(40, 120, 160, 0.16),
-                    rgba(10, 20, 35, 0.6)
-                );
-
-            border:
-                1px solid rgba(100, 210, 255, 0.12);
-        }
-
-
-        .contact h2 {
-            margin-bottom: 15px;
-        }
-
-
-        .contact p {
-            color: #71899b;
-
-            margin-bottom: 30px;
-        }
-
-
-        .instagram {
-            display: inline-block;
-
-            padding: 14px 25px;
-
-            border-radius: 10px;
-
-            background: #45d9ff;
-
-            color: #03101a;
-
-            text-decoration: none;
-
-            font-weight: bold;
-
-            transition: 0.3s;
-        }
-
-
-        .instagram:hover {
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 10px 30px
-                rgba(69, 217, 255, 0.25);
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            text-align: center;
-
-            padding: 50px;
-
-            color: #3d5668;
-
-            font-size: 12px;
-        }
-
-
-        /* =========================
-           ANİMASYON
-        ========================= */
-
-        @keyframes heroTitle {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    translateY(60px)
-                    scale(0.96);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-        }
-
-
-        @keyframes appear {
-
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        /* =========================
-           TELEFON
-        ========================= */
-
-        @media(max-width: 700px) {
-
-            nav {
-                width: 94%;
-            }
-
-            .links {
-                gap: 12px;
-            }
-
-            .links a {
-                font-size: 11px;
-            }
-
-            .hero {
-                padding-left: 7%;
-                padding-right: 7%;
-            }
-
-            .hero h1 {
-                letter-spacing: -7px;
-            }
-
-            section {
-                padding: 100px 0;
-            }
-
-            .projects {
-                grid-template-columns: 1fr;
-            }
-
-            .contact {
-                padding: 45px 20px;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Enes</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #05070c;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* AÇILIŞ EKRANI */
+
+.loader {
+    position: fixed;
+    inset: 0;
+    background: #05070c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: loaderOut 1s ease forwards;
+    animation-delay: 1.8s;
+}
+
+.loader-text {
+    font-size: 45px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    animation: loading 1.5s ease infinite alternate;
+}
+
+.loader-text span {
+    color: #00e5ff;
+}
+
+@keyframes loading {
+    from {
+        opacity: .3;
+        transform: scale(.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes loaderOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* ARKA PLAN */
+
+.bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .25;
+}
+
+.circle.one {
+    width: 350px;
+    height: 350px;
+    background: #0066ff;
+    top: 5%;
+    left: -100px;
+}
+
+.circle.two {
+    width: 300px;
+    height: 300px;
+    background: #00e5ff;
+    bottom: 5%;
+    right: -100px;
+}
+
+/* NAVBAR */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    background: rgba(5,7,12,.65);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.logo span {
+    color: #00e5ff;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #00e5ff;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 10% 80px;
+}
+
+.hero-content {
+    max-width: 900px;
+    animation: heroIn 1s ease forwards;
+}
+
+@keyframes heroIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.small {
+    color: #00e5ff;
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(70px, 13vw, 170px);
+    line-height: .85;
+    letter-spacing: -8px;
+    font-weight: 900;
+}
+
+.hero h1 span {
+    color: #00e5ff;
+}
+
+.hero p {
+    max-width: 550px;
+    color: #8d929c;
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 35px 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255,255,255,.12);
+    transition: .3s;
+}
+
+.btn.primary {
+    background: #00e5ff;
+    color: #020509;
+    font-weight: bold;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    border-color: #00e5ff;
+}
+
+/* SECTIONS */
+
+section {
+    padding: 120px 10%;
+}
+
+.section-title {
+    font-size: 48px;
+    margin-bottom: 50px;
+}
+
+.section-title span {
+    color: #00e5ff;
+}
+
+/* ABOUT */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+}
+
+.about-text {
+    color: #999;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.about-box {
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 35px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.025);
+    transition: .4s;
+}
+
+.about-box:hover {
+    transform: translateY(-8px);
+    border-color: #00e5ff;
+}
+
+.about-box h3 {
+    margin-bottom: 15px;
+}
+
+/* PROJECTS */
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.project {
+    min-height: 250px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.04),
+        rgba(255,255,255,.01)
+    );
+    transition: .4s;
+}
+
+.project:hover {
+    transform: translateY(-10px) scale(1.01);
+    border-color: #00e5ff;
+}
+
+.project-number {
+    color: #00e5ff;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+.project h3 {
+    font-size: 28px;
+    margin: 30px 0 15px;
+}
+
+.project p {
+    color: #888;
+    line-height: 1.6;
+}
+
+/* CONTACT */
+
+.contact {
+    text-align: center;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact h2 {
+    font-size: clamp(45px, 8vw, 90px);
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.contact h2 span {
+    color: #00e5ff;
+}
+
+.contact p {
+    color: #888;
+    margin-bottom: 35px;
+}
+
+.instagram {
+    display: inline-block;
+    padding: 16px 30px;
+    border-radius: 12px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.instagram:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 30px rgba(0,229,255,.35);
+}
+
+/* FOOTER */
+
+footer {
+    padding: 30px;
+    text-align: center;
+    color: #555;
+    border-top: 1px solid rgba(255,255,255,.06);
+}
+
+/* SCROLL ANIMATION */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBİL */
+
+@media (max-width: 700px) {
+
+    nav {
+        padding: 0 6%;
+    }
+
+    nav ul {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    .hero {
+        padding: 120px 7% 70px;
+    }
+
+    .hero h1 {
+        font-size: 75px;
+        letter-spacing: -5px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    section {
+        padding: 80px 7%;
+    }
+
+    .section-title {
+        font-size: 38px;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .projects {
+        grid-template-columns: 1fr;
+    }
+
+    .project {
+        min-height: 220px;
+    }
+
+    .loader-text {
+        font-size: 32px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-    <div class="blue-light"></div>
-    <div class="cyan-light"></div>
+<!-- AÇILIŞ -->
 
+<div class="loader">
+    <div class="loader-text">
+        ENES<span>.</span>
+    </div>
+</div>
 
-    <!-- NAVBAR -->
+<!-- ARKA PLAN -->
 
-    <nav>
+<div class="bg">
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+</div>
 
-        <div class="logo">
-            ENES.
-        </div>
+<!-- NAVBAR -->
 
-        <div class="links">
+<nav>
+    <div class="logo">ENES<span>.</span></div>
 
-            <a href="#about">
-                Hakkımda
-            </a>
+    <ul>
+        <li><a href="#about">Hakkımda</a></li>
+        <li><a href="#projects">Projeler</a></li>
+        <li><a href="#contact">İletişim</a></li>
+    </ul>
+</nav>
 
-            <a href="#projects">
-                Projeler
-            </a>
+<!-- HERO -->
 
-            <a href="#contact">
-                İletişim
-            </a>
+<header class="hero">
 
-        </div>
+    <div class="hero-content">
 
-    </nav>
-
-
-    <!-- HERO -->
-
-    <main class="hero">
-
-        <div class="status">
-
-            <div class="status-dot"></div>
-
-            Şu anda online
-
-        </div>
-
+        <div class="small">WELCOME TO MY WEBSITE</div>
 
         <h1>
             ENES<span>.</span>
         </h1>
 
-
-        <p class="subtitle">
-
-            Teknoloji, oyunlar ve yeni projelerle
-            ilgilenen biriyim. Fikirleri gerçek
-            projelere dönüştürmeyi seviyorum.
-
+        <p>
+            Dijital dünyayı keşfeden, yeni şeyler öğrenen
+            ve kendi projelerini geliştiren biriyim.
         </p>
 
-
-        <div class="hero-buttons">
-
-            <a
-                href="#projects"
-                class="button primary"
-            >
-                Projeler →
+        <div class="buttons">
+            <a href="#projects" class="btn primary">
+                Projeler ↓
             </a>
 
-
-            <a
-                href="#contact"
-                class="button secondary"
-            >
+            <a href="#contact" class="btn">
                 Bana Ulaş
             </a>
-
         </div>
 
+    </div>
 
-        <div class="hero-line"></div>
+</header>
 
-    </main>
+<!-- ABOUT -->
 
+<section id="about" class="reveal">
 
-    <!-- HAKKIMDA -->
+    <div class="section-title">
+        Hakkımda<span>.</span>
+    </div>
 
-    <section id="about">
+    <div class="about">
 
-        <div class="label">
-            01 / Hakkımda
+        <div class="about-text">
+            Teknoloji, oyunlar ve internet dünyasıyla
+            ilgileniyorum. Yeni şeyler öğrenmeyi ve
+            kendi fikirlerimi projeye dönüştürmeyi seviyorum.
         </div>
 
-
-        <h2>
-            Ben kimim?
-        </h2>
-
-
-        <p class="about-text">
-
-            Merhaba, ben <strong>Enes.</strong>
-            Teknolojiyle uğraşmayı, yeni şeyler
-            öğrenmeyi ve kendi projelerimi
-            geliştirmeyi seviyorum.
-
-            <br><br>
-
-            Bu siteyi de tamamen kendi fikirlerimle
-            oluşturduğum kişisel bir proje olarak
-            geliştiriyorum.
-
-        </p>
-
-    </section>
-
-
-    <!-- PROJELER -->
-
-    <section id="projects">
-
-        <div class="label">
-            02 / Projeler
-        </div>
-
-
-        <h2>
-            Çalışmalar.
-        </h2>
-
-
-        <div class="projects">
-
-
-            <div class="project">
-
-                <div class="project-number">
-                    PROJECT 01
-                </div>
-
-                <h3>
-                    Kişisel Web Sitesi
-                </h3>
-
-                <p>
-                    Kendi tasarladığım ve geliştirdiğim
-                    kişisel web sitesi.
-                </p>
-
-            </div>
-
-
-            <div class="project">
-
-                <div class="project-number">
-                    PROJECT 02
-                </div>
-
-                <h3>
-                    Çalışır
-                </h3>
-
-                <p>
-                    Yeni proje yakında burada.
-                </p>
-
-            </div>
-
-
-            <div class="project">
-
-                <div class="project-number">
-                    PROJECT 03
-                </div>
-
-                <h3>
-                    Çalışır
-                </h3>
-
-                <p>
-                    Üzerinde çalışacağım yeni fikir.
-                </p>
-
-            </div>
-
-
-            <div class="project">
-
-                <div class="project-number">
-                    PROJECT 04
-                </div>
-
-                <h3>
-                    Çalışır
-                </h3>
-
-                <p>
-                    Yakında daha fazla proje.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- İLETİŞİM -->
-
-    <section id="contact">
-
-        <div class="contact">
-
-            <div class="label">
-                03 / İletişim
-            </div>
-
-
-            <h2>
-                Bağlantıda kal.
-            </h2>
-
-
+        <div class="about-box">
+            <h3>Şu anda</h3>
             <p>
-                Beni Instagram üzerinden bulabilirsin.
+                Web geliştirme öğreniyorum ve
+                kendi dijital projelerimi oluşturuyorum.
             </p>
-
-
-            <a
-                href="https://www.instagram.com/enessdyn/"
-                class="instagram"
-                target="_blank"
-            >
-                Instagram ↗
-            </a>
-
         </div>
 
-    </section>
+    </div>
 
+</section>
 
-    <footer>
+<!-- PROJECTS -->
 
-        © 2026 ENES.
+<section id="projects" class="reveal">
 
-    </footer>
+    <div class="section-title">
+        Projeler<span>.</span>
+    </div>
 
+    <div class="projects">
+
+        <div class="project">
+            <div class="project-number">01</div>
+            <h3>Web Site</h3>
+            <p>
+                Kendi oluşturduğum kişisel web sitesi.
+            </p>
+        </div>
+
+        <div class="project">
+            <div class="project-number">02</div>
+            <h3>Gaming</h3>
+            <p>
+                Oyun ve teknoloji üzerine çalışmalar.
+            </p>
+        </div>
+
+        <div class="project">
+            <div class="project-number">03</div>
+            <h3>New Ideas</h3>
+            <p>
+                Gelecekte geliştireceğim yeni projeler.
+            </p>
+        </div>
+
+        <div class="project">
+            <div class="project-number">04</div>
+            <h3>Coming Soon</h3>
+            <p>
+                Buraya ileride yeni bir proje gelecek.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="contact reveal">
+
+    <h2>
+        LET'S <span>CONNECT.</span>
+    </h2>
+
+    <p>
+        Beni Instagram üzerinden takip edebilirsin.
+    </p>
+
+    <a
+        class="instagram"
+        href="https://www.instagram.com/enessdyn/"
+        target="_blank"
+    >
+        Instagram ↗
+    </a>
+
+</section>
+
+<footer>
+    © 2026 ENES.
+</footer>
+
+<script>
+
+/* SCROLL ANIMATION */
+
+const elements = document.querySelectorAll(".reveal");
+
+function reveal() {
+
+    elements.forEach(element => {
+
+        const top = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (top < windowHeight - 100) {
+            element.classList.add("active");
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll", reveal);
+
+reveal();
+
+</script>
 
 </body>
 </html>
-```
